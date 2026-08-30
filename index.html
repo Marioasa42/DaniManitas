@@ -9,7 +9,7 @@
         content="Servicios de manitas profesional. Contacta para reparaciones y mantenimiento del hogar via WhatsApp, teléfono o email.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,18 +18,19 @@
 <body>
     <header id="header">
         <div class="container header-content">
-            <a href="#" class="logo">
+            <a href="#hero" class="logo">
                 <img src="DaniManitasLogo.png" alt="DaniManitas Logo">
                 <span>DaniManitas</span>
             </a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#hero">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#iluminacion">Iluminación</a></li>
                     <li><a href="#reformas">Reformas</a></li>
                     <li><a href="#contact">Contacto</a></li>
                 </ul>
-                <div class="burger">
+                <div class="burger" role="button" aria-label="Abrir menú" tabindex="0">
                     <div class="line1"></div>
                     <div class="line2"></div>
                     <div class="line3"></div>
@@ -42,11 +43,35 @@
         <section id="hero">
             <div class="hero-overlay"></div>
             <div class="container hero-content">
-                <h1>Tu Manitas de Confianza</h1>
-                <p>Reparaciones, montajes y mantenimiento con la mejor calidad.</p>
+                <p class="eyebrow eyebrow--hero"><span class="node"></span>Servicio a domicilio</p>
+                <h1>Tu manitas<br>de confianza.</h1>
+                <p class="hero-lede">Reparaciones, montajes y mantenimiento con la mejor calidad.</p>
                 <div class="cta-group">
-                    <a href="#contact" class="btn btn-primary">Contactar Ahora</a>
-                    <a href="#iluminacion" class="btn btn-secondary">Ver Trabajos</a>
+                    <a href="#contact" class="btn btn-primary">Contactar ahora</a>
+                    <a href="#iluminacion" class="btn btn-secondary">Ver trabajos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios -->
+        <section id="servicios" class="services-section reveal">
+            <div class="container">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-toolbox"></i></div>
+                        <h3>Reparaciones</h3>
+                        <p>Pequeñas reparaciones, montajes y arreglos generales del hogar.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Iluminación</h3>
+                        <p>Instalación y diseño de iluminación interior y exterior.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-hammer"></i></div>
+                        <h3>Reformas</h3>
+                        <p>Reformas integrales y parciales con acabados de calidad.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -54,37 +79,47 @@
         <!-- Sección Iluminación -->
         <section id="iluminacion" class="portfolio-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
+                    <p class="eyebrow"><span class="tick"></span>Portfolio</p>
                     <h2>Iluminación</h2>
                     <p>Instalaciones y diseños de iluminación profesional.</p>
                 </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="luces1.jpeg" alt="Proyecto de iluminación 1">
+                <div class="gallery-grid" data-gallery="iluminacion">
+                    <div class="gallery-item reveal">
+                        <img src="luces1.jpeg" alt="Proyecto de iluminación 1" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces2.jpeg" alt="Proyecto de iluminación 2">
+                    <div class="gallery-item reveal">
+                        <img src="luces2.jpeg" alt="Proyecto de iluminación 2" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces3.jpeg" alt="Proyecto de iluminación 3">
+                    <div class="gallery-item reveal">
+                        <img src="luces3.jpeg" alt="Proyecto de iluminación 3" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces4.jpeg" alt="Proyecto de iluminación 4">
+                    <div class="gallery-item reveal">
+                        <img src="luces4.jpeg" alt="Proyecto de iluminación 4" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces5.jpeg" alt="Proyecto de iluminación 5">
+                    <div class="gallery-item reveal">
+                        <img src="luces5.jpeg" alt="Proyecto de iluminación 5" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces6.jpeg" alt="Proyecto de iluminación 6">
+                    <div class="gallery-item reveal">
+                        <img src="luces6.jpeg" alt="Proyecto de iluminación 6" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces7.jpeg" alt="Proyecto de iluminación 7">
+                    <div class="gallery-item reveal">
+                        <img src="luces7.jpeg" alt="Proyecto de iluminación 7" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces8.jpeg" alt="Proyecto de iluminación 8">
+                    <div class="gallery-item reveal">
+                        <img src="luces8.jpeg" alt="Proyecto de iluminación 8" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="luces9.jpeg" alt="Proyecto de iluminación 9">
+                    <div class="gallery-item reveal">
+                        <img src="luces9.jpeg" alt="Proyecto de iluminación 9" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
                 </div>
             </div>
@@ -93,49 +128,63 @@
         <!-- Sección Reformas -->
         <section id="reformas" class="portfolio-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header reveal">
+                    <p class="eyebrow"><span class="tick"></span>Portfolio</p>
                     <h2>Reformas</h2>
                     <p>Transformaciones completas con acabados de calidad.</p>
                 </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img src="reforma1.jpeg" alt="Proyecto de reforma 1">
+                <div class="gallery-grid" data-gallery="reformas">
+                    <div class="gallery-item reveal">
+                        <img src="reforma1.jpeg" alt="Proyecto de reforma 1" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma2.jpeg" alt="Proyecto de reforma 2">
+                    <div class="gallery-item reveal">
+                        <img src="reforma2.jpeg" alt="Proyecto de reforma 2" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma3.jpeg" alt="Proyecto de reforma 3">
+                    <div class="gallery-item reveal">
+                        <img src="reforma3.jpeg" alt="Proyecto de reforma 3" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma4.jpeg" alt="Proyecto de reforma 4">
+                    <div class="gallery-item reveal">
+                        <img src="reforma4.jpeg" alt="Proyecto de reforma 4" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma5.jpeg" alt="Proyecto de reforma 5">
+                    <div class="gallery-item reveal">
+                        <img src="reforma5.jpeg" alt="Proyecto de reforma 5" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma6.jpeg" alt="Proyecto de reforma 6">
+                    <div class="gallery-item reveal">
+                        <img src="reforma6.jpeg" alt="Proyecto de reforma 6" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma7.jpeg" alt="Proyecto de reforma 7">
+                    <div class="gallery-item reveal">
+                        <img src="reforma7.jpeg" alt="Proyecto de reforma 7" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma8.jpeg" alt="Proyecto de reforma 8">
+                    <div class="gallery-item reveal">
+                        <img src="reforma8.jpeg" alt="Proyecto de reforma 8" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma9.jpeg" alt="Proyecto de reforma 9">
+                    <div class="gallery-item reveal">
+                        <img src="reforma9.jpeg" alt="Proyecto de reforma 9" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma10.jpeg" alt="Proyecto de reforma 10">
+                    <div class="gallery-item reveal">
+                        <img src="reforma10.jpeg" alt="Proyecto de reforma 10" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma11.jpeg" alt="Proyecto de reforma 11">
+                    <div class="gallery-item reveal">
+                        <img src="reforma11.jpeg" alt="Proyecto de reforma 11" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma12.jpeg" alt="Proyecto de reforma 12">
+                    <div class="gallery-item reveal">
+                        <img src="reforma12.jpeg" alt="Proyecto de reforma 12" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
-                    <div class="gallery-item">
-                        <img src="reforma13.jpeg" alt="Proyecto de reforma 13">
+                    <div class="gallery-item reveal">
+                        <img src="reforma13.jpeg" alt="Proyecto de reforma 13" loading="lazy">
+                        <span class="frame" aria-hidden="true"></span>
                     </div>
                 </div>
             </div>
@@ -143,26 +192,27 @@
 
         <section id="contact">
             <div class="container">
-                <div class="section-header">
-                    <h2>Contacta Conmigo</h2>
+                <div class="section-header reveal">
+                    <p class="eyebrow eyebrow--light"><span class="tick"></span>Hablemos</p>
+                    <h2>Contacta conmigo</h2>
                     <p>Estoy disponible para resolver tus dudas y darte presupuesto.</p>
                 </div>
                 <div class="contact-cards">
-                    <a href="https://wa.me/34627014153" target="_blank" class="card whatsapp">
+                    <a href="https://wa.me/34627014153" target="_blank" rel="noopener" class="card whatsapp reveal">
                         <div class="icon-box">
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <h3>WhatsApp</h3>
                         <p>Chat directo y rápido</p>
                     </a>
-                    <a href="tel:+34627014153" class="card phone">
+                    <a href="tel:+34627014153" class="card phone reveal">
                         <div class="icon-box">
                             <i class="fas fa-phone-alt"></i>
                         </div>
                         <h3>Llamar</h3>
                         <p>+34 627 014 153</p>
                     </a>
-                    <a href="mailto:info@danimanitas.com" class="card email">
+                    <a href="mailto:info@danimanitas.com" class="card email reveal">
                         <div class="icon-box">
                             <i class="fas fa-envelope"></i>
                         </div>
@@ -176,13 +226,24 @@
 
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2024 DaniManitas. Todos los derechos reservados.</p>
+            <p>&copy; 2026 DaniManitas. Todos los derechos reservados.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
         </div>
     </footer>
+
+    <a href="https://wa.me/34627014153" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Escribir por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada" hidden>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior">&#8249;</button>
+        <img src="" alt="" id="lightboxImg">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Siguiente">&#8250;</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
