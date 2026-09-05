@@ -1,3 +1,5 @@
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const navSlide = () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
@@ -58,7 +60,6 @@ window.addEventListener('scroll', () => {
 });
 
 // Scroll reveal
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealTargets = document.querySelectorAll('.reveal');
 
 if (prefersReducedMotion) {
@@ -78,6 +79,115 @@ if (prefersReducedMotion) {
 
     revealTargets.forEach((el) => revealObserver.observe(el));
 }
+
+// Smooth scroll (Lenis) + GSAP scroll-driven effects
+let lenis = null;
+
+if (!prefersReducedMotion && window.Lenis && window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    lenis = new Lenis({
+        duration: 1.1,
+        smoothWheel: true,
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Hero background parallax
+    gsap.to('#hero', {
+        backgroundPosition: '50% 30%',
+        ease: 'none',
+        scrollTrigger: {
+            trigger: '#hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+        },
+    });
+
+    // Staggered entrance for grid-based sections
+    const staggerGroups = ['.services-grid', '.process-grid'];
+    staggerGroups.forEach((selector) => {
+        const container = document.querySelector(selector);
+        if (!container) return;
+        gsap.from(container.children, {
+            opacity: 0,
+            y: 28,
+            duration: 0.6,
+            ease: 'power2.out',
+            stagger: 0.12,
+            scrollTrigger: {
+                trigger: container,
+                start: 'top 82%',
+            },
+        });
+    });
+}
+
+// Smooth-scroll internal nav links (works with or without Lenis)
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (id.length <= 1) return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        if (lenis) {
+            lenis.scrollTo(target, { offset: -80 });
+        } else {
+            target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Portfolio filter tabs
+(() => {
+    const tabs = document.querySelectorAll('.filter-tab');
+    const grid = document.querySelector('.gallery-grid[data-gallery="portfolio"]');
+    const emptyState = document.querySelector('[data-empty="reparaciones"]');
+    if (!tabs.length || !grid) return;
+
+    const items = Array.from(grid.querySelectorAll('.gallery-item'));
+
+    const applyFilter = (filter) => {
+        if (filter === 'reparaciones') {
+            grid.hidden = true;
+            if (emptyState) emptyState.hidden = false;
+            return;
+        }
+
+        grid.hidden = false;
+        if (emptyState) emptyState.hidden = true;
+
+        const toShow = [];
+        items.forEach((item) => {
+            const match = filter === 'all' || item.dataset.category === filter;
+            item.style.display = match ? '' : 'none';
+            if (match) toShow.push(item);
+        });
+
+        if (!prefersReducedMotion && window.gsap) {
+            gsap.fromTo(
+                toShow,
+                { opacity: 0, y: 14 },
+                { opacity: 1, y: 0, duration: 0.4, stagger: 0.03, ease: 'power2.out' }
+            );
+        }
+    };
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach((t) => t.classList.remove('is-active'));
+            tab.classList.add('is-active');
+            applyFilter(tab.dataset.filter);
+        });
+    });
+})();
 
 // Lightbox
 (() => {
@@ -121,9 +231,17 @@ if (prefersReducedMotion) {
     };
 
     document.querySelectorAll('.gallery-grid').forEach((grid) => {
-        const images = Array.from(grid.querySelectorAll('img'));
-        grid.querySelectorAll('.gallery-item').forEach((item, index) => {
-            item.addEventListener('click', () => openLightbox(images, index));
+        grid.addEventListener('click', (e) => {
+            const item = e.target.closest('.gallery-item');
+            if (!item || item.style.display === 'none') return;
+
+            const visibleItems = Array.from(grid.querySelectorAll('.gallery-item')).filter(
+                (i) => i.style.display !== 'none'
+            );
+            const images = visibleItems.map((i) => i.querySelector('img'));
+            const index = visibleItems.indexOf(item);
+
+            openLightbox(images, index);
         });
     });
 
