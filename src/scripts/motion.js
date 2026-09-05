@@ -123,6 +123,37 @@ if (panWrap && panTrack) {
 }
 
 /* ---------------------------------------------------------------------
+   Reformas swipe dots — highlight the visible slide and let taps jump
+   to a slide, so the mobile carousel reads as obviously interactive.
+--------------------------------------------------------------------- */
+document.querySelectorAll('.pan-dots').forEach((dotsEl) => {
+  const track = dotsEl.previousElementSibling;
+  if (!track || !track.classList.contains('pan-track')) return;
+
+  const slides = Array.from(track.querySelectorAll('.pan-slide'));
+  const dots = Array.from(dotsEl.querySelectorAll('.pan-dot'));
+  if (!slides.length || !dots.length) return;
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest', inline: 'start' });
+    });
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const index = slides.indexOf(entry.target);
+        dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+      });
+    },
+    { root: track, threshold: 0.6 }
+  );
+  slides.forEach((slide) => observer.observe(slide));
+});
+
+/* ---------------------------------------------------------------------
    Magnetic primary CTAs.
 --------------------------------------------------------------------- */
 if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {

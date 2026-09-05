@@ -45,6 +45,16 @@ const { id, eyebrow, title, lede, images, altPrefix, variant, dark = false } = A
             </figure>
           ))}
         </div>
+        <div class="pan-dots" role="tablist" aria-label={`Ver más ${title.toLowerCase()}`}>
+          {images.map((_, i) => (
+            <button
+              type="button"
+              class={`pan-dot ${i === 0 ? 'is-active' : ''}`}
+              data-pan-dot
+              aria-label={`Ir a la imagen ${i + 1} de ${images.length}`}
+            ></button>
+          ))}
+        </div>
       </div>
     )}
   </div>
@@ -129,8 +139,14 @@ const { id, eyebrow, title, lede, images, altPrefix, variant, dark = false } = A
   }
 
   .pan-track .pan-slide {
-    flex: 0 0 min(420px, 78vw);
+    flex: 0 0 86%;
     scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    .pan-track .pan-slide {
+      flex-basis: min(420px, 60%);
+    }
   }
 
   @media (min-width: 900px) {
@@ -144,6 +160,36 @@ const { id, eyebrow, title, lede, images, altPrefix, variant, dark = false } = A
       overflow: visible;
       scroll-snap-type: none;
       padding-bottom: 0;
+    }
+  }
+
+  /* Reformas mobile swipe indicators */
+  .pan-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .pan-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .pan-dot.is-active {
+    background: var(--signal);
+    transform: scale(1.25);
+  }
+
+  @media (min-width: 900px) {
+    .pan-dots {
+      display: none;
     }
   }
 </style>
