@@ -1,0 +1,71 @@
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior">&#8249;</button>
+  <img src="" alt="" id="lightboxImg" />
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Siguiente">&#8250;</button>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox') as HTMLDivElement;
+  const lightboxImg = document.getElementById('lightboxImg') as HTMLImageElement;
+  const closeBtn = document.getElementById('lightboxClose') as HTMLButtonElement;
+  const prevBtn = document.getElementById('lightboxPrev') as HTMLButtonElement;
+  const nextBtn = document.getElementById('lightboxNext') as HTMLButtonElement;
+
+  let currentGroup: HTMLImageElement[] = [];
+  let currentIndex = 0;
+
+  const updateImage = () => {
+    const img = currentGroup[currentIndex];
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+  };
+
+  const open = (group: HTMLImageElement[], index: number) => {
+    currentGroup = group;
+    currentIndex = index;
+    updateImage();
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    lightbox.hidden = true;
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  };
+
+  const next = () => {
+    currentIndex = (currentIndex + 1) % currentGroup.length;
+    updateImage();
+  };
+
+  const prev = () => {
+    currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+    updateImage();
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-lightbox-group]').forEach((group) => {
+    const items = Array.from(group.querySelectorAll<HTMLElement>('.lightbox-item'));
+    const images = items.map((item) => item.querySelector('img')).filter((img): img is HTMLImageElement => Boolean(img));
+
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => open(images, index));
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+</script>

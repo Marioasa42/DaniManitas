@@ -1,0 +1,113 @@
+---
+const channels = [
+  { href: 'https://wa.me/34627014153', icon: 'fab fa-whatsapp', title: 'WhatsApp', sub: 'Chat directo y rápido', external: true },
+  { href: 'tel:+34627014153', icon: 'fas fa-phone-alt', title: 'Llamar', sub: '+34 627 014 153', external: false },
+  { href: 'mailto:info@danimanitas.com', icon: 'fas fa-envelope', title: 'Email', sub: 'info@danimanitas.com', external: false },
+];
+---
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header section-header--dark reveal">
+      <p class="eyebrow eyebrow--dark"><span class="tick"></span>Hablemos</p>
+      <h2>Contacta conmigo</h2>
+      <p>Cuéntame qué necesitas y te respondo con disponibilidad y presupuesto.</p>
+    </div>
+    <div class="contact-cards">
+      {channels.map((c) => (
+        <a
+          href={c.href}
+          target={c.external ? '_blank' : undefined}
+          rel={c.external ? 'noopener' : undefined}
+          class="card reveal"
+          data-magnetic
+        >
+          <div class="icon-box"><i class={c.icon}></i></div>
+          <h3>{c.title}</h3>
+          <p>{c.sub}</p>
+        </a>
+      ))}
+    </div>
+    <p class="service-area">
+      <i class="fas fa-plug"></i>
+      Servicio a domicilio en Madrid y alrededores
+    </p>
+  </div>
+</section>
+
+<style>
+  #contact {
+    padding: 120px 0 100px;
+    background: var(--graphite);
+    color: var(--on-dark);
+  }
+
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+    margin-top: 50px;
+  }
+
+  .card {
+    background: var(--slate);
+    padding: 38px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid var(--slate-line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--signal);
+  }
+
+  .icon-box {
+    width: 56px;
+    height: 56px;
+    background-color: var(--signal-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--signal);
+    font-size: 21px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .card:hover .icon-box {
+    background-color: var(--signal);
+    color: var(--graphite);
+  }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    color: var(--muted-on-dark);
+  }
+
+  .service-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 56px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--muted-on-dark);
+  }
+
+  .service-area i {
+    color: var(--signal);
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/logo.png';
+
+const navLinks = [
+  { href: '#hero', label: 'Inicio' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#iluminacion', label: 'Iluminación' },
+  { href: '#reformas', label: 'Reformas' },
+  { href: '#contact', label: 'Contacto' },
+];
+---
+
+<header id="header">
+  <div class="container header-content">
+    <a href="#hero" class="logo">
+      <Image src={logo} alt="DaniManitas" width={72} height={72} />
+      <span>DaniManitas</span>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href}>
+              {link.label}
+              <span class="underline" aria-hidden="true"></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="burger" id="burger" role="button" aria-label="Abrir menú" aria-expanded="false" tabindex="0">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('header');
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('is-sticky', window.scrollY > 8);
+  });
+
+  const toggleNav = () => {
+    const isActive = navLinks?.classList.toggle('is-active');
+    burger?.classList.toggle('is-active', Boolean(isActive));
+    burger?.setAttribute('aria-expanded', String(Boolean(isActive)));
+  };
+
+  burger?.addEventListener('click', toggleNav);
+  burger?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleNav();
+    }
+  });
+
+  navLinks?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (navLinks.classList.contains('is-active')) toggleNav();
+    });
+  });
+</script>

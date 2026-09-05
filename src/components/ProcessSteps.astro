@@ -1,0 +1,79 @@
+---
+const steps = [
+  { n: '01', title: 'Contacto', copy: 'Me escribes por WhatsApp, llamada o email y me cuentas qué necesitas.' },
+  { n: '02', title: 'Diagnóstico', copy: 'Valoro el trabajo (in situ o por fotos) y te doy un presupuesto cerrado.' },
+  { n: '03', title: 'Ejecución', copy: 'Ejecuto el trabajo en la fecha acordada, cuidando cada acabado.' },
+  { n: '04', title: 'Entrega', copy: 'Revisamos juntos el resultado antes de darlo por terminado.' },
+];
+---
+
+<section id="proceso" class="process-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Cómo trabajo</h2>
+      <p>Cuatro pasos, sin sorpresas ni presupuestos a ciegas.</p>
+    </div>
+    <div class="process-grid">
+      {steps.map((s) => (
+        <div class="process-step reveal">
+          <span class="process-number">{s.n}</span>
+          <h3>{s.title}</h3>
+          <p>{s.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-section {
+    padding: 110px 0;
+    background: var(--paper);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  .process-step {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .process-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--signal);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .process-step h3 {
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .process-step p {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 900px) {
+    .process-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .process-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

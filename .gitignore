@@ -6,3 +6,16 @@
 
 # Claude Code local settings (may contain machine-specific/local data)
 .claude/settings.local.json
+
+# Astro build output / generated types
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# macOS
+.DS_Store

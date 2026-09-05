@@ -1,0 +1,26 @@
+{
+  "name": "danimanitas",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@fontsource/work-sans": "^5.3.0",
+    "astro": "^7.3.1",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.26"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}
