@@ -121,13 +121,17 @@ if (panWrap && panTrack) {
     return () => tween.scrollTrigger?.kill();
   });
 
-  // The very first ScrollTrigger refresh can run before the pan track has
-  // settled into its final layout width, which under-sizes the pinned
-  // scroll distance and cuts the animation short. Re-measure once
-  // everything (fonts, images) has actually finished loading.
-  const refreshOnceSettled = () => window.dispatchEvent(new Event('resize'));
-  window.addEventListener('load', refreshOnceSettled, { once: true });
-  document.fonts?.ready?.then(refreshOnceSettled);
+  // ScrollTrigger's very first measurement can race the browser's own
+  // layout pass and under-size the pinned scroll distance, cutting the
+  // animation short. Neither `readyState`/`load` timing nor a plain
+  // `ScrollTrigger.refresh()` call reliably avoids this — but forcing a
+  // native resize event does, since it goes through GSAP's own resize
+  // handling, which fully re-measures the (already pinned) track. Do it
+  // once the browser has settled after paint, and again on full load as a
+  // safety net for slower connections.
+  const resync = () => window.dispatchEvent(new Event('resize'));
+  requestAnimationFrame(() => requestAnimationFrame(resync));
+  window.addEventListener('load', resync, { once: true });
 }
 
 /* ---------------------------------------------------------------------
