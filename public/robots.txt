@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://danimanitas.com/sitemap-index.xml
