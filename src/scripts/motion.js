@@ -120,6 +120,14 @@ if (panWrap && panTrack) {
     });
     return () => tween.scrollTrigger?.kill();
   });
+
+  // The very first ScrollTrigger refresh can run before the pan track has
+  // settled into its final layout width, which under-sizes the pinned
+  // scroll distance and cuts the animation short. Re-measure once
+  // everything (fonts, images) has actually finished loading.
+  const refreshOnceSettled = () => window.dispatchEvent(new Event('resize'));
+  window.addEventListener('load', refreshOnceSettled, { once: true });
+  document.fonts?.ready?.then(refreshOnceSettled);
 }
 
 /* ---------------------------------------------------------------------
